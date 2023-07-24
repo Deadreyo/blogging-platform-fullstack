@@ -3,21 +3,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col'
-import { Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
+import Link from 'next/link';
 
 function NavbarComponent() {
+  
+  const isLoggedIn = !!localStorage.getItem("token");
+
+  // @TODO: Implement logout functionality
+
   return (
     <Navbar className="bg-info">
       <Container>
-        <Navbar.Brand href="#home">Blog App</Navbar.Brand>
+        <Link href="/">
+        <Navbar.Brand>Blog App</Navbar.Brand>
+        </Link>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
             <Row className='text-center items-center'>
 
-              <FontAwesomeIcon size='3x' icon={faCircleUser} className="p-0" />
-              <Navbar.Text className="p-0">
-                  <a href="#login">Mark Otto</a>
-              </Navbar.Text>
+            {
+              isLoggedIn ?
+              (
+                <>
+                  <FontAwesomeIcon size='3x' icon={faCircleUser} className="p-0" />
+                  <Navbar.Text className="p-0">
+                    <Link href="/login">Log out</Link>
+                  </Navbar.Text>
+                </>
+              )
+              :
+              (
+                <Link href="/login">
+                  <Button variant="secondary">
+                    Log in
+                  </Button>
+                </Link>
+              )
+            }
 
             </Row>
         </Navbar.Collapse>
