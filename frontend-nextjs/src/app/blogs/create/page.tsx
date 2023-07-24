@@ -3,8 +3,11 @@
 import { Button, Container, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { BASE_URL } from "@/hooks/useFetch";
+import { useRouter } from "next/navigation";
 
 export default function () {
+    const router = useRouter();
+    if(!localStorage.getItem("token")) router.push("/login");
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
