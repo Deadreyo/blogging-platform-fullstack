@@ -25,7 +25,7 @@ export default function () {
 
         // @TODO: Validate form
         // @TODO: make custom hook for post requests
-        const req = await fetch(BASE_URL+"/blog/create", {
+        const req = await fetch(BASE_URL+"/blogs", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export default function () {
         })
 
         const res = await req.json();
-        if(!res.ok) {
+        if(!req.ok) {
             alert("Error: " + res.message);
         } else {
             alert("Blog created successfully!");
