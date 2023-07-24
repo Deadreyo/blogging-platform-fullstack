@@ -22,7 +22,7 @@ function BlogCard({
         <Card.Footer>
           <div className="items-center flex-wrap flex justify-between">
               <Card.Subtitle className="text-muted">By {author.name}</Card.Subtitle>
-              <Card.Text className="text-muted">{new Date(createdAt).toISOString()}</Card.Text>
+              <Card.Text className="text-muted">{new Date(createdAt).toDateString()}</Card.Text>
           </div>
         </Card.Footer>
       </Card>

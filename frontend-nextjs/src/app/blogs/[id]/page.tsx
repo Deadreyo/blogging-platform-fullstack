@@ -17,7 +17,7 @@ export default function Blog({ params }: { params: { id: string } }) {
                 {blog!.title}
             </h1>
             <h3>
-                By {blog!.author.name} on {new Date(blog!.createdAt).toISOString()}
+                By {blog!.author.name} on {new Date(blog!.createdAt).toDateString()}
             </h3>
 
             <p>
