@@ -32,7 +32,7 @@ export default function Login() {
         if(!req.ok) {
             alert("Error: " + res.message);
         } else {
-            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("token", res.token);
             router.push("/");
         }
 
