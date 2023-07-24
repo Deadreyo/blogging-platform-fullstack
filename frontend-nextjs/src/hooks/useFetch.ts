@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const BASE_URL = "http://localhost:3001/"
+export const BASE_URL = "http://localhost:3001"
 
 export default function useFetch<T>(route: string, options?: RequestInit) {
     const [response, setResponse] = useState<T | null>(null);

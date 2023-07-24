@@ -17,7 +17,7 @@ export default function Register() {
       const name = nameRef.current?.value;
       const password = passwordRef.current?.value;
 
-      const req = await fetch(BASE_URL+"auth/register", {
+      const req = await fetch(BASE_URL+"/auth/register", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
@@ -30,7 +30,7 @@ export default function Register() {
       })
 
       const res = await req.json();
-      if(!res.ok) {
+      if(req.ok) {
           alert("Error: " + res.message);
       } else {
           localStorage.setItem("token", res.data.token);

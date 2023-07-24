@@ -9,13 +9,15 @@ export default function Login() {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
+    // @TODO: Use state management library for storing token
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
 
-        const req = await fetch(BASE_URL+"auth/login", {
+        const req = await fetch(BASE_URL+"/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +29,7 @@ export default function Login() {
         })
 
         const res = await req.json();
-        if(!res.ok) {
+        if(!req.ok) {
             alert("Error: " + res.message);
         } else {
             localStorage.setItem("token", res.data.token);
