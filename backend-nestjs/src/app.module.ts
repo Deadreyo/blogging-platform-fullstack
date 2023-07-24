@@ -10,7 +10,12 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), MongooseModule.forRoot(env.MONGO_URL), BlogsModule, UsersModule, AuthModule ,
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(env.MONGO_URL),
+    BlogsModule,
+    UsersModule,
+    AuthModule,
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => {
         return {
@@ -20,9 +25,9 @@ import { JwtModule } from '@nestjs/jwt';
       },
       inject: [ConfigService],
       global: true,
-    }),],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {}

@@ -6,20 +6,20 @@ import { Public } from './decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-    @HttpCode(HttpStatus.OK)
-    @Public()
-    @Post('login')
-    signIn(@Body() body: SignInDto) {
-        const { email, password } = body;
-        return this.authService.signIn(email, password);
-    }
+  @HttpCode(HttpStatus.OK)
+  @Public()
+  @Post('login')
+  signIn(@Body() body: SignInDto) {
+    const { email, password } = body;
+    return this.authService.signIn(email, password);
+  }
 
-    @Public()
-    @HttpCode(HttpStatus.CREATED)
-    @Post('register')
-    signUp(@Body() body: CreateUserDto) {
-        return this.authService.signUp(body);
-    }
+  @Public()
+  @HttpCode(HttpStatus.CREATED)
+  @Post('register')
+  signUp(@Body() body: CreateUserDto) {
+    return this.authService.signUp(body);
+  }
 }

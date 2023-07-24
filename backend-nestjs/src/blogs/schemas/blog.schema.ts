@@ -13,7 +13,7 @@ export class Blog {
   @Prop({ required: true })
   content: string;
 
-  @Prop({ type: Date, default: Date.now})
+  @Prop({ type: Date, default: Date.now })
   createdAt: Date;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })

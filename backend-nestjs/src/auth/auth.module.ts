@@ -11,11 +11,12 @@ import { APP_GUARD } from '@nestjs/core';
   imports: [forwardRef(() => UsersModule)],
   controllers: [AuthController],
   providers: [
-    AuthService, {
-    provide: APP_GUARD,
-    useClass: AuthGuard,
-  },
-],
-  exports: [AuthService]
+    AuthService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
+  exports: [AuthService],
 })
 export class AuthModule {}
