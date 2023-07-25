@@ -1,30 +1,22 @@
 import { Form, Button } from "react-bootstrap";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { BASE_URL } from "@/hooks/useFetch";
 import { useRouter } from "next/navigation";
 import auth from "@/utils/auth";
+import { AuthContext } from "./AuthProvider";
 
 export default function Login() {
-
-    const router = useRouter()
+    const { login } = useContext(AuthContext)
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-    // @TODO: Use state management library for storing token
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
 
-        try{
-            await auth.login(email!, password!);
-            router.push("/");
-        } catch(e) {
-            alert(e);
-        }
-
+        login(email!, password!);
     }
 
     return (

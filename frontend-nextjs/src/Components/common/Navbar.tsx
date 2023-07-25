@@ -6,14 +6,13 @@ import Col from 'react-bootstrap/Col'
 import { Button, Row } from 'react-bootstrap';
 import Link from 'next/link';
 import auth from '@/utils/auth';
+import { AuthContext } from '../auth/AuthProvider';
+import { useContext } from 'react';
 
-function NavbarComponent() {
+function NavbarComponent() { 
+  const { token, logout } = useContext(AuthContext)
   
-  const isLoggedIn = !!auth.getToken();
-
-  function handleLogout() {
-    auth.logout();
-  }
+  const isLoggedIn = !!token;
 
   return (
     <Navbar className="bg-info">
@@ -30,7 +29,7 @@ function NavbarComponent() {
               (
                 <>
                   <FontAwesomeIcon size='3x' icon={faCircleUser} className="p-0" />
-                  <Navbar.Text className="p-0" onClick={handleLogout}>
+                  <Navbar.Text className="p-0" onClick={logout}>
                     <Link href="/login">Log out</Link>
                   </Navbar.Text>
                 </>

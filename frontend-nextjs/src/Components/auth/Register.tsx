@@ -1,30 +1,21 @@
-import { BASE_URL } from "@/hooks/useFetch";
-import auth from "@/utils/auth";
-import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Form, Button } from "react-bootstrap";
+import { AuthContext } from "./AuthProvider";
 
 export default function Register() {
-
-  const router = useRouter()
+  const { register } = useContext(AuthContext)
   const emailRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const email = emailRef.current?.value;
     const name = nameRef.current?.value;
     const password = passwordRef.current?.value;
 
-    try{
-      await auth.register(email!, name!, password!);
-      router.push("/");
-    } catch(e) {
-      alert(e);
-    }
-
+    register(email!, password!, name!);
   }
     return (
         <div>

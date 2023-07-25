@@ -1,6 +1,4 @@
 import { BASE_URL } from "@/hooks/useFetch";
-
-
 function getToken() {
     return localStorage.getItem('token');
 }
@@ -24,6 +22,7 @@ async function login(email: string, password: string) {
         throw new Error(json.message);
     }
     setToken(json.token);
+    return json.token;
 }
 
 async function register(username: string, email: string, password: string) {
@@ -37,6 +36,7 @@ async function register(username: string, email: string, password: string) {
         throw new Error(json.message);
     }
     setToken(json.token);
+    return json.token;
 }
 
 function logout() {

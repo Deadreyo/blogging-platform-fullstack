@@ -3,12 +3,11 @@
 import { Button, Container, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { BASE_URL } from "@/hooks/useFetch";
-import { useRouter } from "next/navigation";
-import auth from "@/utils/auth";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 export default function () {
-    useProtectedRoute();
+
+    const token = useProtectedRoute();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -30,7 +29,7 @@ export default function () {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + auth.getToken()
+                Authorization: "Bearer " + token
             },
             body: JSON.stringify({
                 title,

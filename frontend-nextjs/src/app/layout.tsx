@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 import { SSRProvider } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-loading-skeleton/dist/skeleton.css'
+import AuthProvider from '@/Components/auth/AuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,8 +25,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SSRProvider>
-          <NavbarComponent />
-          {children}
+          <AuthProvider>
+            <NavbarComponent />
+            {children}
+          </AuthProvider>
         </SSRProvider>
       </body>
     </html>
