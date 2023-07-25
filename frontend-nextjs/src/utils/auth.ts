@@ -13,11 +13,11 @@ function removeToken() {
    localStorage.removeItem('token');
 } 
 
-async function login(username: string, password: string) {
+async function login(email: string, password: string) {
     const res = await fetch(BASE_URL+'/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email, password })
     });
     const json = await res.json();
     if(!res.ok) {
