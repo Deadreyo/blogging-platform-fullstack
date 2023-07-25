@@ -4,10 +4,11 @@ import { Button, Container, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { BASE_URL } from "@/hooks/useFetch";
 import { useRouter } from "next/navigation";
+import auth from "@/utils/auth";
 
 export default function () {
     const router = useRouter();
-    if(!localStorage.getItem("token")) router.push("/login");
+    if(!auth.getToken()) router.push("/login");
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -29,7 +30,7 @@ export default function () {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token")
+                Authorization: "Bearer " + auth.getToken()
             },
             body: JSON.stringify({
                 title,

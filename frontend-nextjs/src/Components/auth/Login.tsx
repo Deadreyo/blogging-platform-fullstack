@@ -2,6 +2,7 @@ import { Form, Button } from "react-bootstrap";
 import { useRef } from "react";
 import { BASE_URL } from "@/hooks/useFetch";
 import { useRouter } from "next/navigation";
+import auth from "@/utils/auth";
 
 export default function Login() {
 
@@ -17,23 +18,11 @@ export default function Login() {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
 
-        const req = await fetch(BASE_URL+"/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        })
-
-        const res = await req.json();
-        if(!req.ok) {
-            alert("Error: " + res.message);
-        } else {
-            localStorage.setItem("token", res.token);
+        try{
+            await auth.login(email!, password!);
             router.push("/");
+        } catch(e) {
+            alert(e);
         }
 
     }
@@ -44,12 +33,12 @@ export default function Login() {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" ref={emailRef} />
+                    <Form.Control type="email" placeholder="Enter email" ref={emailRef} required />
                 </Form.Group>
         
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" ref={passwordRef} />
+                    <Form.Control type="password" placeholder="Password" ref={passwordRef} required />
                 </Form.Group>
                 
                 <Button variant="primary" type="submit">

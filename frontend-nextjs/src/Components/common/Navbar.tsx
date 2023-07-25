@@ -5,12 +5,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col'
 import { Button, Row } from 'react-bootstrap';
 import Link from 'next/link';
+import auth from '@/utils/auth';
 
 function NavbarComponent() {
   
-  const isLoggedIn = !!localStorage.getItem("token");
+  const isLoggedIn = !!auth.getToken();
 
-  // @TODO: Implement logout functionality
+  function handleLogout() {
+    auth.logout();
+  }
 
   return (
     <Navbar className="bg-info">
@@ -27,7 +30,7 @@ function NavbarComponent() {
               (
                 <>
                   <FontAwesomeIcon size='3x' icon={faCircleUser} className="p-0" />
-                  <Navbar.Text className="p-0">
+                  <Navbar.Text className="p-0" onClick={handleLogout}>
                     <Link href="/login">Log out</Link>
                   </Navbar.Text>
                 </>
