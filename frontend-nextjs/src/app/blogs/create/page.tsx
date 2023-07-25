@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import { BASE_URL } from "@/hooks/useFetch";
 import { useRouter } from "next/navigation";
 import auth from "@/utils/auth";
+import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 export default function () {
-    const router = useRouter();
-    if(!auth.getToken()) router.push("/login");
+    useProtectedRoute();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
